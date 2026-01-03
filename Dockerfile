@@ -1,15 +1,11 @@
 FROM serversideup/php:8.4-fpm-nginx
 
-# Install required extensions for Firefly III
-# Firefly III requires: bcmath, intl, json (core), mbstring, openssl, pdo, simplexml, sodium, tokenizer, xml, xmlwriter, curl, fileinfo, iconv, zip
+USER root
+
 RUN install-php-extensions \
     bcmath \
     intl \
-    pdo_sqlite \
-    pdo_mysql \
-    zip \
-    gd \
-    opcache
+    gd
 
 # Switch to root to configure storage and permissions
 USER root
