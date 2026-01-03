@@ -19,7 +19,8 @@ USER www-data
 # Install Composer dependencies
 # We use --no-dev to keep the image small
 # We use --ignore-platform-reqs to avoid issues if the container PHP version is slightly newer (e.g. 8.5-dev) than dependencies allow
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --ignore-platform-reqs
+# We use --no-scripts to prevent auto-running 'php artisan' commands during build (which fail without DB/Env)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --ignore-platform-reqs --no-scripts
 
 # Create the data directory for the SQLite database volume
 # Railway will mount a volume here. We need to ensure the application can write to it.
